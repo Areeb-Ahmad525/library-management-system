@@ -1,11 +1,7 @@
 name: Library Management CI
 
 on:
-  push:
-    branches:
-      - main
-      - feature/**
-
+  
   pull_request:
     branches:
       - main
@@ -29,3 +25,11 @@ jobs:
       - name: Verify Repository
         run: |
           echo "Repository checked successfully!"
+
+      - name: Lint README.md
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: README.md
+
+      - name: Check requirements.txt exists
+        run: bash scripts/check_requirements.sh
